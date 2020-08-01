@@ -84,10 +84,22 @@ if (!empty($_POST)){
                 <input type="text" name="usuario" value="<?php echo $usuario;?>" placeholder="Introduzca el Usuario" >
                 <label type = "rol">Rol</label>
                 
+                <?php 
+                // Carga los roles de desde la base de datos 
+                $query_rol = mysqli_query($connection, "SELECT * FROM rol"); 
+                $resul_rol = mysqli_num_rows($query_rol);
+                ?>
                 <select name="rol" id="idrol" >
-                    <option value="0">Elija un  Rol</option>
-                    <option <?php if (isset($rol) && $rol=="1") echo "selected";?> value="1">Administrador</option>
-                    <option <?php if (isset($rol) && $rol=="2") echo "selected";?> value="2">Supervisor</option>
+                <option value="0">Elija un Rol</option>
+                <?php 
+                if ($resul_rol > 0){
+                    while($rol = mysqli_fetch_array($query_rol)){ ?>
+                    <option value="<?php echo $rol['idrol']?>"><?php echo $rol['rol']?></option>
+                    <?php
+                }// fin del while
+        
+                }// fin del IF
+                ?>    
                     <option <?php if (isset($rol) && $rol=="3") echo "selected";?> value="3">Vendedor</option>
                 </select>
 
