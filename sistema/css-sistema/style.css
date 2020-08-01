@@ -161,3 +161,73 @@ nav li ul li:last-child{
 	padding: 90px 15px 15px;
 }
 /*****************************************************************/
+/* CSS de campo Regitrar Usuario*/
+.form_register{
+	width: 450px;
+	margin: auto;
+	}
+.form_register h1{
+	color: #3c93b0;
+}
+
+
+
+hr{
+	border: 0;
+	background: #CCC;
+	height: 1px;
+	margin: 10px 0;
+	display: block;
+	}
+
+form{
+	background: #FFF;
+	margin: auto;
+	padding: 20px 50px;
+	border: 1px auto 5px #d1d1d1;
+}
+label{
+	display: block;
+	font-size: 12pt;
+	font-family: 'arial';
+	margin: 15px auto 5px auto;
+
+}
+input,select{
+	display: block;
+	width: 100%;
+	font-size: 11pt;
+	padding:5px;
+	border: 1px solid #85929e;
+	border-radius: 5px;
+}
+
+.btn-Registrar{
+	font-size: 12px;
+	background: #12a4c6;
+	padding: 10px;
+	color: #FFF;
+	letter-spacing: 1px;
+	margin-top: 10px;
+}
+
+.alert{
+	width: 100%;
+	background: #66e07d66;
+	border-radius: 3px;
+	margin: 20px auto;
+}
+
+.msg_error{
+	color: rgb(177, 92, 31);
+}
+
+.msg_save{
+	color: rgb(131, 16, 238);
+}
+	
+.alert p{
+	padding: 10px;
+}
+
+

@@ -3,9 +3,10 @@
     Fecha   : 31/07/2020
     Funcion : Sistema de Facturacion Basico PHP
   */
-  session_start();
-  $alert='';
+    $alert='';
+    session_start();
   if (!empty($_SESSION['active'])){
+    // agregar un mensaje para que si alguin intenta entrar le notifique 
     header('location:sistema/index.php');
 
   }else{
@@ -18,8 +19,9 @@
          }else{
              require_once('connection.php');
              // almacena los input ingresdos
-            $user = $_POST['email'];
-            $password = $_POST['password'];
+            $user = mysqli_real_escape_string($connection, $_POST['email']) ;
+            // la funcion MD5 
+            $password = md5(mysqli_real_escape_string($connection, $_POST['password']));
 
              //consulta los datos en la base de datos
              $query = mysqli_query($connection,"SELECT * FROM usuario WHERE correo ='$user' AND clave = '$password'");
@@ -33,11 +35,11 @@
                 //(imprimer Array) print_r($data);
 
                 $_SESSION['active'] = true;
-                $_SESSION['idUser'] = $data = ['idusuario'];
-                $_SESSION['nombre'] = $data = ['nombre'];
-                $_SESSION['email'] = $data = ['correo'];
-                $_SESSION['usuario'] = $data = ['usuario'];
-                $_SESSION['rol'] = $data = ['rol'];
+                $_SESSION['idUser'] = $data['idusuario'];
+                $_SESSION['nombre'] = $data['nombre'];
+                $_SESSION['email'] = $data['correo'];
+                $_SESSION['user'] = $data['usuario'];
+                $_SESSION['rol'] = $data['rol'];
                 header('location:sistema/index.php');
              }else{
                $alert = 'El usuario o la contraseña son incorrectos';
@@ -57,11 +59,13 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.0.1">
-
+      
+        <!-- icono  -->
+    <link rel="shortcut icon" href="sistema/img/ico-prueba.png" type="image/x-icon">
         <!-- CSS -->
-    
-    <link href="assets/dist/css/bootstrap.css" rel="stylesheet">
-    <link href="css/signin.css" rel="stylesheet">
+
+    <link href="css-login/assets/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="css-login/signin.css" rel="stylesheet">
     <title>Signin</title>
     
     
@@ -72,7 +76,7 @@
   </head>
   <body class="text-center">
     <form class="form-signin" method="POST" >
-  <img class="mb-4" src="assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+  <img class="mb-4" src="css-login/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
   <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
   <label for="inputEmail" class="sr-only">Email address</label>
   <input type="email" name= "email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
