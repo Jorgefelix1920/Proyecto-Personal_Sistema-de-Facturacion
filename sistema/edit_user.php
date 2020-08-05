@@ -3,7 +3,7 @@
   $msg_alert='';
   $msg_error='';
   $nombre = $email = $usuario = $rol = NULL;
-
+        echo $id;
  
 if (!empty($_POST)){
   
@@ -50,7 +50,36 @@ if (!empty($_POST)){
     }
 }
 
-?>
+
+        // Recupera los datos de la base de datos a traves del Id Proporcionado  
+
+        if (empty($_GET['id'])){
+            header('location:lista_Usuarios.php?mensaje="Tiene que Proporsionar un ID"');
+        }else {
+            $iduser=$_GET['id'];
+            $sql = mysqli_query($connection, "SELECT  u.idusuario, u.nombre, u.correo, u.usuario, (u.rol) as idrol, (r.rol) as rol 
+            FROM usuario u 
+            INNER JOIN rol r 
+            on u.rol = r.idrol
+            WHERE idsuarior=$iduser");
+
+            $resultado_sql = mysqli_num_rows($sql);
+            if ($resultado_sql==0 ){
+                header('location:lista_Usuarios.php?mensaje="Usuario no Encontrado"');
+            }else{
+                while ($data = mysqli_fetch_array($sql)) {
+                    $idusuario = $data['idusuario'];
+                    $nombre = $data['nombre'];
+                    $email = $data['correo'];
+                    $usuario = $data['usuario']; 
+                    $idrol = $data['idrol'];
+                    $rol = $data['rol'];
+                }
+            }
+        ?>
+        }
+
+       
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -76,9 +105,6 @@ if (!empty($_POST)){
                 <label type = "email">Correo Electronico</label>
                 <input type="email" name="email" value="<?php echo $email;?>" placeholder="Introduzca el Correo" >
 
-                <label type = "password">Password</label>
-                <input type="password" name="password" placeholder="Introduzca la contraseña" >
-
                 <label type = "Usuario">Nombre de Usuario</label>
                 <input type="text" name="usuario" value="<?php echo $usuario;?>" placeholder="Introduzca el Usuario" >
                 <label type = "rol">Rol</label>
@@ -101,13 +127,13 @@ if (!empty($_POST)){
                 ?>    
                 </select>
 
-            <input type="submit" class="btn-Registrar" value="Registrar  ">
+            <input type="submit" class="btn-Registrar" value="Actualizar Usuario">
             </form>
 
 
 
         </div>
 	</section>
-	<?php include_once('includes/footer.php');?>
+	<?php include_once('includes/footer.php'); ?>
 </body>
 </html>

@@ -40,10 +40,10 @@
 
                 $_SESSION['active'] = true;
                 $_SESSION['idUser'] = $data['idusuario'];
-                $_SESSION['nombre'] = $data['nombre']="jorge";
+                $_SESSION['nombre'] = $data['nombre'];
                 $_SESSION['email'] = $data['correo'];
                 $_SESSION['user'] = $data['usuario'];
-                $_SESSION['rol'] = $data['rol']="1";
+                $_SESSION['rol'] = $data['rol'];
                 header('location:sistema/index.php');
              }else{
                $alert = 'El usuario o la contraseña son incorrectos';

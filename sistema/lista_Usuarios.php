@@ -44,8 +44,8 @@
             <td><?php echo $data['usuario'];?></td>
             <td><?php echo $data['rol'];?></td>
             <td>
-            <a href="edit_user.php" class="link-edit">Editar</a>
-            <a href="" class="link-delete">Eliminar</a>
+            <a href="edit_user.php?id=<?php echo $data['idusuario'];?>" class="link-edit">Editar</a>
+            <a href="delete_user.php?id=<?php echo $data['idusuario'];?>" class="link-delete">Eliminar</a>
             </td>
 <?php
             }
@@ -55,8 +55,11 @@
        
         </tr>
     </table>
-
+<?php if (!empty($_GET['mensaje'])){
+    echo $_GET['mensaje'];
+}
+?>
 </section>
-    <
+    
 </body>
 </html>
