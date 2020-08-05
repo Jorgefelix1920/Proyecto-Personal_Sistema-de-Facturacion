@@ -1,6 +1,7 @@
 <?php 
  session_start();
  if (empty($_SESSION['active'])){
+    $_SESSION['erro']="SOLO USUARIOS AUTENTIFICADOS PUEDEN INGRESAR A ESTA ÁREA";
    header('location:../index.php');
  }
  ?>

@@ -231,3 +231,61 @@ input,select{
 }
 
 
+/*===========================LISTA DE USUARIO===========================*/
+
+#container h1{
+font-size: 35px;
+display: inline-block;
+}
+
+.new-btn-user{
+	display: inline-block;
+	background: #239baa;
+	color: #FFF;
+	padding: 5PX 20PX;
+	border-radius: 5px;
+	margin: 20px;
+}
+
+table{
+	border-collapse: collapse;
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+	width: 100%;
+}
+
+table th{
+	text-align: left;
+	padding: 10px;
+	background: #3d7ba8;
+	color: #FFF;
+}
+
+table tr:nth-child(odd){
+	background: #FFF;
+}
+
+
+table td{
+	padding: 10px;
+}
+
+/*LISTA DE USUARIO:BOTONES DE EDICION*/
+
+.link-edit{
+	display: inline-block;
+	background: #5f03ff;
+	color: #FFF;
+	padding: 5PX 20PX;
+	border-radius: 5px;
+}
+
+.link-delete{
+	display: inline-block;
+	background: #ff0000;
+	color: #FFF;
+	padding: 5PX 20PX;
+	border-radius: 5px;
+}
+
+}

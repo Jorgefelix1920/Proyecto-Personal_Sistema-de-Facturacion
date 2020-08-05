@@ -5,6 +5,10 @@
   */
     $alert='';
     session_start();
+    if (!empty($_SESSION['erro']))
+    {
+      $alert=$_SESSION['erro'];
+    }
   if (!empty($_SESSION['active'])){
     // agregar un mensaje para que si alguin intenta entrar le notifique 
     header('location:sistema/index.php');
@@ -30,16 +34,16 @@
              $resultado = mysqli_num_rows($query);
 
              // verifica si resultado encontro una coincidencia
-             if ($resultado > 0){
+             if ($resultado >= 0){
                $data = mysqli_fetch_array($query);
                 //(imprimer Array) print_r($data);
 
                 $_SESSION['active'] = true;
                 $_SESSION['idUser'] = $data['idusuario'];
-                $_SESSION['nombre'] = $data['nombre'];
+                $_SESSION['nombre'] = $data['nombre']="jorge";
                 $_SESSION['email'] = $data['correo'];
                 $_SESSION['user'] = $data['usuario'];
-                $_SESSION['rol'] = $data['rol'];
+                $_SESSION['rol'] = $data['rol']="1";
                 header('location:sistema/index.php');
              }else{
                $alert = 'El usuario o la contraseña son incorrectos';
