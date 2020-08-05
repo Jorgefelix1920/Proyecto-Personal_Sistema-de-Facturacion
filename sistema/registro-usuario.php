@@ -29,7 +29,6 @@ if (!empty($_POST)){
 
         $resultado = mysqli_fetch_array($query);
         if($resultado > 0) {
-                mysqli_close($connection);
                 $msg_alert='alert';
                 $msg_error='<p class ="msg_error">El Correo o el Usuario ya existe</p>';
 
@@ -90,7 +89,7 @@ if (!empty($_POST)){
                 $resul_rol = mysqli_num_rows($query_rol);
                 ?>
                 <select name="rol" id="idrol" >
-                <option value="0">Elija un Rol</option>
+                <option>Elija un Rol</option>
                 <?php 
                 if ($resul_rol > 0){
                     while($rol = mysqli_fetch_array($query_rol)){ ?>
@@ -100,7 +99,6 @@ if (!empty($_POST)){
         
                 }// fin del IF
                 ?>    
-                    <option <?php if (isset($rol) && $rol=="3") echo "selected";?> value="3">Vendedor</option>
                 </select>
 
             <input type="submit" class="btn-Registrar" value="Registrar  ">
