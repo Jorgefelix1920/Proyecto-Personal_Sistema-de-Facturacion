@@ -170,8 +170,6 @@ nav li ul li:last-child{
 	color: #3c93b0;
 }
 
-
-
 hr{
 	border: 0;
 	background: #CCC;
@@ -201,6 +199,11 @@ input,select{
 	border: 1px solid #85929e;
 	border-radius: 5px;
 }
+	/*=====================ELIMINA EL PRIMER ITEN DEL SELECT ACTUALZIAR USUARIO=====================E*/
+
+	.noItem option:first-child{
+		display: none;
+	}
 
 .btn-Registrar{
 	font-size: 12px;

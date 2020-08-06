@@ -12,7 +12,7 @@
 <?php require_once('../connection.php') ?>
 
 <section id="container">
-    <h1>Actualizar Usuario</h1>
+    <h1>Lista de Usuario</h1>
     <a href="registro-usuario.php" class="new-btn-user">Nuevo Usuario</a>
 
     <table>
@@ -30,9 +30,9 @@
         // carga las tablas desde la base de datos 
 
         $query = mysqli_query($connection, "SELECT u.idusuario, u.nombre, u.correo, u.usuario, r.rol 
-        FROM usuario u INSERT JOIN rol r ON u.rol = r.idrol");
+        FROM usuario u INNER JOIN rol r ON u.rol = r.idrol");
 
-        $resultado = mysqli_num_rows($query, $connection);
+        $resultado = mysqli_num_rows($query);
 
         if ($resultado > 0) {
             while($data=mysqli_fetch_array($query)){?>

@@ -34,7 +34,7 @@
              $resultado = mysqli_num_rows($query);
 
              // verifica si resultado encontro una coincidencia
-             if ($resultado >= 0){
+             if ($resultado > 0){
                $data = mysqli_fetch_array($query);
                 //(imprimer Array) print_r($data);
 

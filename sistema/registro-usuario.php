@@ -36,7 +36,6 @@ if (!empty($_POST)){
                 // inserta los datos en la tabla usuario 
                 $query_insert = mysqli_query($connection, "INSERT INTO usuario (nombre, correo, usuario, clave, rol) 
                 VALUE ('$nombre', '$email', '$usuario', '$password', '$rol')");
-                    mysqli_close($connection);
 
                 if ($query_insert){
                     $msg_alert='alert';
@@ -65,7 +64,6 @@ if (!empty($_POST)){
 	<section id="container">
 		<div class="form_register">
             <h1>Registro Usuario</h1>
-            <hr>
 
             <div class="<?php echo $msg_alert?>"><?php echo $msg_error?></div>
 
@@ -98,7 +96,7 @@ if (!empty($_POST)){
                 }// fin del while
         
                 }// fin del IF
-                ?>    
+                mysqli_close($connection) ?>    
                 </select>
 
             <input type="submit" class="btn-Registrar" value="Registrar  ">
