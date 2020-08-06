@@ -2,6 +2,8 @@
   require_once('../connection.php'); 
   $msg_alert='';
   $msg_error='';
+  $option ='';
+  $class='';
   $nombre = $email = $usuario = $rol = NULL;
 
  
@@ -20,6 +22,21 @@ if (!empty($_POST)){
         $password =  md5($_POST['password']);
         $usuario  =  $_POST['usuario'];
         $rol      =  $_POST['rol'];
+        
+        if ($rol == 1)
+        {
+           $option = '<option value="'.$rol.'"select>Administrador </option>';
+           $class='noItem';
+
+        } else  if ($rol == 2)
+        {
+            $option = '<option value="'.$rol.'"select>Supervisor </option>';
+            $class='noItem';
+        } else  if ($rol == 3)
+        {
+            $option = '<option value="'.$rol.'"select>Vendedor</option>';
+            $class='noItem';
+        }
 
         // esta consulta verifica si el usuario o el correo existen
         $query = mysqli_query($connection, "SELECT * FROM usuario WHERE usuario = '$usuario' OR correo = '$email'");
@@ -86,22 +103,23 @@ if (!empty($_POST)){
                 $query_rol = mysqli_query($connection, "SELECT * FROM rol"); 
                 $resul_rol = mysqli_num_rows($query_rol);
                 ?>
-                <select name="rol" id="idrol" >
-                <option>Elija un Rol</option>
-                <?php 
-                if ($resul_rol > 0){
-                    while($rol = mysqli_fetch_array($query_rol)){ ?>
-                    <option value="<?php echo $rol['idrol']?>"><?php echo $rol['rol']?></option>
-                    <?php
+                <select name="rol" id="idrol"class="<?php echo $class;?>">
+                <?php echo $option;?>
+                <option>Elija un Rol</option>";
+                <?php     
+                    if ($resul_rol > 0){
+                        while($rol = mysqli_fetch_array($query_rol)){ ?>
+                        <option value="<?php echo $rol['idrol']?>"><?php echo $rol['rol']?></option>
+                        <?php
                 }// fin del while
         
                 }// fin del IF
+            
                 mysqli_close($connection) ?>    
                 </select>
 
             <input type="submit" class="btn-Registrar" value="Registrar  ">
             </form>
-
 
 
         </div>
