@@ -8,36 +8,45 @@
 
  
 if (!empty($_POST)){
-  
+    
+    $nombre   =  $_POST['nombre'];
+    $email    =  $_POST['email'];
+    // COdificamos la Clave antes de entrar en la base de datos
+    $password =  md5($_POST['password']);
+    $usuario  =  $_POST['usuario'];
+    $rol      =  $_POST['rol'];
+        // EVALUAR CADA CAMPO POR SEPARADO 
     if(empty($_POST['nombre']) || empty($_POST['email']) || empty($_POST['password']) || empty($_POST['usuario']) || empty($_POST['rol'])){
 
         // envia una alerta de error al encontrar un campo vacio
         $msg_alert='alert';
-        $msg_error='<p class ="msg_error"> Todos los Campos son Obligatorios</p>';
-    }else{ 
+        $msg_error='<p class ="msg_error"> Todos los campos son obligatorios</p>';
+    }else{            
+            
+            // Coloca el Campo selecionado en el selected 
+            $registros = mysqli_query($connection, "SELECT idrol,rol
+                        FROM rol 
+                        WHERE idrol='$rol'") or
+            die("Problemas en el select:" . mysqli_error($connection));
 
-        $nombre   =  $_POST['nombre'];
-        $email    =  $_POST['email'];
-        // COdificamos la Clave antes de entrar en la base de datos
-        $password =  md5($_POST['password']);
-        $usuario  =  $_POST['usuario'];
-        $rol      =  $_POST['rol'];
-        
-        if ($rol == 1)
-        {
-           $option = '<option value="'.$rol.'"select>Administrador </option>';
-           $class='noItem';
 
-        } else  if ($rol == 2)
-        {
-            $option = '<option value="'.$rol.'"select>Supervisor </option>';
-            $class='noItem';
-        } else  if ($rol == 3)
-        {
-            $option = '<option value="'.$rol.'"select>Vendedor</option>';
-            $class='noItem';
-        }
+                if ($reg = mysqli_fetch_array($registros)) {
+                
+                        if ($reg['idrol'] == 1)
+                        {
+                            $option = '<option value="'.$reg['idrol'].'"select>'.$reg['rol'].'</option>';
+                        $class='noItem';
 
+                        } else  if ($rol == 2)
+                        {
+                            $option = '<option value="'.$reg['idrol'].'"select>'.$reg['rol'].'</option>';
+                            $class='noItem';
+                        } else  if ($rol == 3)
+                        {
+                            $option = '<option value="'.$reg['idrol'].'"select>'.$reg['rol'].'</option>';
+                            $class='noItem';
+                        }
+    }
         // esta consulta verifica si el usuario o el correo existen
         $query = mysqli_query($connection, "SELECT * FROM usuario WHERE usuario = '$usuario' OR correo = '$email'");
 
@@ -57,6 +66,10 @@ if (!empty($_POST)){
                 if ($query_insert){
                     $msg_alert='alert';
                     $msg_error='<p class ="msg_save">El Usuario se Registro Correctamente</p>';
+                    
+                    // limpia las variable depues del registro 
+                    $nombre   =   $email    = $password =  $usuario  = $rol =null;
+                   
     
                 }else{
                     $msg_alert='alert';

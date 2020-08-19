@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Actualizar Usuario</title>
+    <title>Usiarops Inativos</title>
     <?php include_once('includes/scripts.php') ?>
     
 </head>
@@ -33,17 +33,23 @@
             <th>NOMBRE</th>
             <th>CORREO</th>
             <th>USUARIO</th>
-            <th>FECHA DE INGRESO</th>
             <th>ROL</th>
-            <th>ACCIONES</th>
+            <th>ESTATUS</th>
+            <th>FECHA DE CREACION</th>
+            <th>FECHA DE ELIMINACION</th>
+             <th>ACCIONES</th>
+          
 
         </tr>
 
         <?php 
         // carga las tablas desde la base de datos 
 
-        $query = mysqli_query($connection, "SELECT u.idusuario, u.nombre, u.correo, u.usuario, u.fecha_de_creacion, r.rol 
-        FROM usuario u INNER JOIN rol r ON u.rol = r.idrol WHERE estatus = 1");
+        $query = mysqli_query($connection, "SELECT u.idusuario, u.nombre, u.correo, u.usuario, r.rol, u.estatus, u.fecha_de_creacion 
+                                            FROM usuario u 
+                                            INNER JOIN rol r 
+                                            ON u.rol = r.idrol 
+                                            WHERE estatus = 0");
 
         $resultado = mysqli_num_rows($query);
 
@@ -55,17 +61,19 @@
             <td><?php echo $data['nombre'];?></td>
             <td><?php echo $data['correo'];?></td>
             <td><?php echo $data['usuario'];?></td>
-            <td><?php echo $data['fecha_de_creacion'];?></td>
             <td><?php echo $data['rol'];?></td>
-            <td>
-          
-            <a href="edit_user.php?id=<?php echo $data['idusuario'];?>" class="link-edit">Editar</a>
+            <td><?php if ($data['estatus']==0){
+                echo "Desactivado";
+            }else if ($data['estatus']==1){
+                echo "Activo";}?></td>
+            <td><?php echo $data['fecha_de_creacion'];?></td>
+            <td></td>
 
-              <?php if ($data['rol'] !='Administrador' &&  $_SESSION['nombre'] !=$data['nombre'] && $data['idusuario'] !=1){?>
-            <a href="delete_user.php?id=<?php echo $data['idusuario'];?>" onclick="return confirmarDelete()" class="link-delete">Eliminar</a>
+            <td>
+            <a href="php?id=<?php echo $data['idusuario'];?>" onclick="return confirmarDelete()" class="link-delete">Reactivar</a>
             </td>
-<?php v 
-            }}
+<?php
+            }
         }
 
         ?>
